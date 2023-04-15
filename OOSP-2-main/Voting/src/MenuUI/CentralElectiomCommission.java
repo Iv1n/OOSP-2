@@ -1,7 +1,8 @@
 package MenuUI;
 
 import CECService.CreateVoid;
-;
+import DataBase.DataBaseHendlerPeople;
+
 import java.util.Scanner;
 
 public class CentralElectiomCommission {
@@ -46,7 +47,6 @@ public class CentralElectiomCommission {
                 System.out.println("Вы выбрали не сущетвующию категорию");
             }
 
-
         System.out.println("Введите дату окончания" +
                 "В формате год-месяц-дата");
         String expiratiomDate = scanner.next();
@@ -73,14 +73,57 @@ public class CentralElectiomCommission {
 
     }
     public void addCandidate(){
+        System.out.println("Введите ФИО");
+        Scanner scanner = new Scanner(System.in);
+        String namePeople = scanner.nextLine();
 
+        System.out.println("Введите дату рождения в формате год-месяц-число");
+        String dateBorne = scanner.nextLine();
+
+        System.out.println("Выберите пол:\n" +
+                "1) Мужской\n" +
+                "2) Женский");
+        int num = scanner.nextInt();
+        String gender = null;
+        String jobTitle = "Кандидат";
+        if(num==1 | num==2) {
+            if (num == 1) {
+                gender = "Мужской";
+            }
+            if (num == 2) {
+                gender = "Женский";
+            }
+        }
+        else {
+            System.out.println("Прочтите учебник биологии");
+            System.exit(0);
+        }
+        DataBaseHendlerPeople dataBaseHendlerPeople = new DataBaseHendlerPeople();
+        dataBaseHendlerPeople.addPeople(namePeople,dateBorne,gender,jobTitle);
     }
+
     public void outputResults(){
         //Здесь надо будет сделать возможность выбирать действия
         //1) Выбор группирповки
         //Группировать по году/виду голосования
         //2) Выбор сортировки
         //Сортировать по дате...
+        System.out.println("Введиет цифру 1 если хотите сортировать от старых к недавним\n" +
+                "Введите цифру 2 если хотите сортировать от новых к старым\n");
+        int numSortiro;
+        numSortiro = scanner.nextInt();
+        if (numSortiro == 1 | numSortiro == 2){
+            if(numSortiro == 1){
+
+            }
+            if(numSortiro == 2){
+
+            }
+        }
+        else {
+            System.out.println("Вы выбрали не существующий метод сортировки");
+            System.exit(0);
+        }
     }
     public void voidC(String nameVoid,String kindOfVoiting,String expiratiomDate){
         System.out.println("Выберите кандидатов");
@@ -90,13 +133,20 @@ public class CentralElectiomCommission {
         String str = scanner.next();
         String delimer = ",";
         caldidate = str.split(delimer);
-        createVoid.choisCandidate(caldidate);
+        //createVoid.choisCandidate(caldidate);
 
         createVoid.ss(nameVoid,kindOfVoiting,expiratiomDate,caldidate);
         CentralElectionCommissionMenuUI CECMUI = new CentralElectionCommissionMenuUI();
         CECMUI.profile();
     }
 
+    public void sortOldNewDate(){
+
+    }
+
+    public void sortNewOldDate(){
+
+    }
 
 }
 
